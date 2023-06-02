@@ -1,22 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="dark">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewpoint" content="width=device-width, intial-scale=1.0">
-		<title> MineCraft Server Manger</title>
-		<link rel="stylesheet" href="styles.css"?>
+		<title>Minecraft Server Manager</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 		<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 	</head>
-	<body>
-		<h1> MineCraft Server Manager </h1>
-		<form action="" method="POST">
-			<div class="h-captcha" data-sitekey="c808ee6f-6a68-4706-af1f-e00d9bc5b6e8"></div>
-			<br />
-			<input type="submit" value="Submit" />
-		</form>
-		<button id="startServerBtn"> Start Server</button>
-		<button id="getServerStatus"> Server Status</button>
-		<pre id="response"></pre>
-		<script src="webscript.js"></script>
-	</body>
+<body style="height: 100vh">
+	<div class="container d-flex justify-content-center align-items-center" style="height: 100%">
+		<div>
+<h1 class="h3 mb-3 fw-normal">Minecraft Server Manager</h1>
+	<p>Complete the CAPTCHA, then press start server.</p>
+	<div id="h-captcha" class="h-captcha" data-sitekey="c808ee6f-6a68-4706-af1f-e00d9bc5b6e8"></div>
+	<button class="btn btn-primary w-100 py-2" id="startServerBtn">Start Server</button>
+<div class="alert alert-dark my-2" role="alert">
+	<p id="response" class="text-wrap" style="width: 15rem"></p>
+</div>
+		</div>
+	</div>
+</body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script>
+document.getElementById('startServerBtn').addEventListener('click', startServer);
+
+// Trigger the getStatus function when the page finishes loading
+window.onload = getStatus;
+
+const startServerBtn = document.getElementById('startServerBtn')
+
+function startServer() {
+	// Retrieve the hcaptcha token
+        startServerBtn.setAttribute('disabled', '')
+	const hcaptchaDiv = document.getElementById('h-captcha')
+	const iframe = hcaptchaDiv.querySelector('iframe')
+	const hcaptchaToken = iframe.getAttribute('data-hcaptcha-response')
+
+	// Make the POST request to start the server
+	fetch('https://api.robert.zip/server/start', {
+		method: 'POST',
+		body: hcaptchaToken
+	})
+		.then(handleResponse)
+		.then(displayResponse)
+		.catch(displayError)
+}
+
+function getStatus() {
+	// Make the GET request to get the server status
+	fetch('https://api.robert.zip/server/status')
+		.then(handleResponse)
+		.then(displayResponse)
+		.catch(displayError);
+}
+
+function handleResponse(response) {
+	if (!response.ok) {
+		throw new Error(`Request failed with status ${response.status}`);
+	}
+	return response.text();
+}
+
+function displayResponse(responseText) {
+	document.getElementById('response').textContent = responseText;
+	setTimeout(function() {
+		startServerBtn.removeAttribute('disabled')
+	}, 1000)
+}
+
+function displayError(error) {
+	document.getElementById('response').textContent = `An error occurred: ${error.message}`;
+setTimeout(function() {
+		startServerBtn.removeAttribute('disabled')
+	}, 1000)
+}
+
+
+</script>
+</body>
 </html>

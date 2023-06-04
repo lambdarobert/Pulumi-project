@@ -64,7 +64,7 @@ executable bootstrap
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.18.0.0, hal ^>=1.0.0.1, aeson, bytestring, scientific, text
+    build-depends:    base ^>=4.18.0.0, hal ^>=1.0.0.1, aeson, bytestring, scientific, text, http-client, http-client-tls, http-types, string-interpolate
 
     -- Directories containing source files.
     hs-source-dirs:   app

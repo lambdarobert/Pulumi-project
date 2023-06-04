@@ -1,7 +1,7 @@
 source ../private_keys.sh
 export AWS_PAGER=""
 location=$(cabal exec which bootstrap)
-cabal build --enable-executable-static
+cabal build -O2 --enable-executable-static
 status=$?
 if [ $status -eq 0 ];
 then

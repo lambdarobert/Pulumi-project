@@ -23,3 +23,7 @@ Stopping the server automatically:
 The script `ec2_runscript.sh` can put into your EC2 instance to run at startup, and will bootstrap the Minecraft server as well as stop it when nobody was playing. It depends on the Python script checkplayers.py, a script that will query the number of players and output it to stdout.
 
 For the instance, this was tested in on a c5d.large instance. It has NVMe storage, which is utilized by `ec2_runscript.sh`. It also uses an EFS mount, so you will have to change the ID accordingly.
+
+# Terraform Script
+
+Find it at `generate.tf`. Most identifying information has been removed, so you will have to fill those in.

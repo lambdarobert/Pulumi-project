@@ -6,7 +6,7 @@ chown -R ubuntu:minecraft /mnt/efs
 chmod -R 770 /mnt/efs
 chown -R ubuntu:minecraft /mnt/nvme
 chmod -R 770 /mnt/nvme
-sudo -u minecraft bash /home/minecraft/minecraft.sh
+sudo -u minecraft docker run -d -p 25565:25565 --name mc --mount /mnt/nvme  itzg/minecraft-server
 while true
 do
 sleep 500

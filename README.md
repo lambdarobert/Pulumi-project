@@ -3,8 +3,7 @@
 This is a project for a fully automated Minecraft server using AWS. In this case, fully automated means that all provisioning happens in the cloud using the scripts provided in the repository, and AWS resources. This handles starting the server through a static website, and stopping it when nobody is playing.
 
 # Diagram
-
-TBD
+![Diagram](https://cdn.discordapp.com/attachments/797578517239562240/1115678980415176734/IMG_2970.jpg)
 
 ## Provisioning System
 The AWS lambdas used to provision are are:

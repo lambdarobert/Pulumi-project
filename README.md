@@ -27,3 +27,5 @@ For the instance, this was tested in on a c5d.large instance. It has NVMe storag
 # Terraform Script
 
 Find it at `generate.tf`. Most identifying information has been removed, so you will have to fill those in. In a lot of cases you can just delete those fields, but I have left them in for posterity to allow for use with already existing resources.
+
+Because of this, the terraform script **does not run out of the box.**
